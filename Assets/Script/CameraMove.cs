@@ -30,7 +30,7 @@ public class CameraMove : MonoBehaviour
         transform.rotation = lerp_rot;
 
         float playerSpeed = playerMove.Getspeed.magnitude;
-        camera.orthographicSize = 50 + (playerSpeed);
+        camera.orthographicSize = 100 + (playerSpeed * 2);
 
         //transform.LookAt(player.transform);
     }

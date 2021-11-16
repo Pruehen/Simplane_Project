@@ -11,13 +11,16 @@ public class Status : MonoBehaviour
     public float EnginePower { get { return enginePower; } set { enginePower = value; } }
     public float Mobility { get { return mobility; } set { mobility = value; } }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         hp = 100;
         enginePower = 100;
         mobility = 100;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -27,5 +30,10 @@ public class Status : MonoBehaviour
         {
             GameObject.Destroy(gameObject);
         }
+    }
+
+    public void Damage(float dmg)
+    {
+        Hp -= dmg;
     }
 }

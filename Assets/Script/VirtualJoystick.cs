@@ -12,12 +12,19 @@ public class VirtualJoystick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        input.Set(0.5f, 0.5f, 0);
+        input.Set(0.8f, 0.3f, 0);
     }
+
+    float time;
 
     // Update is called once per frame
     void Update()
     {
-
+        time += Time.deltaTime;
+        if (time > 3)
+        {
+            input.Set(-0.8f, 0.3f, 0);
+            time = 0;
+        }
     }
 }

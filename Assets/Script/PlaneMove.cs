@@ -22,13 +22,9 @@ public class PlaneMove : MonoBehaviour
         {
             joystick = GameObject.FindObjectOfType<Joystick>();
         }
-        else
-        {
-            virtualjoystick = this.gameObject.GetComponent<VirtualJoystick>();
-        }
     }
 
-    private void Start()
+    void Start()
     {
         Init();
     }
@@ -37,10 +33,12 @@ public class PlaneMove : MonoBehaviour
     {
         enginePower = gameObject.GetComponent<Status>().EnginePower;
         mobility = gameObject.GetComponent<Status>().Mobility;
-        if (joystick == null)
+
+
+        if (gameObject.tag == "Enemy")
         {
+            virtualjoystick = null;
             virtualjoystick = this.gameObject.GetComponent<VirtualJoystick>();
-            Debug.Log(gameObject.name);
         }
     }
 
@@ -62,7 +60,7 @@ public class PlaneMove : MonoBehaviour
             rb.AddForce(transform.right * 1f * Time.deltaTime * joystick.Horizontal * mobility * mobilityConstant);
             rb.AddTorque(rightMovement * mobility * mobilityConstant);
         }
-        else
+        else if (gameObject.tag == "Enemy")
         {
             Vector3 upMovement = transform.up * Time.deltaTime * virtualjoystick.Vertical;
             Vector3 rightMovement = -Vector3.forward * Time.deltaTime * virtualjoystick.Horizontal;

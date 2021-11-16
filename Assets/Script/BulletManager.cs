@@ -17,7 +17,7 @@ public class BulletManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Initialize(100);
+        Initialize(150);
     }
 
     private void Initialize(int initcount)

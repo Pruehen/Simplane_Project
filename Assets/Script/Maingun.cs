@@ -11,6 +11,18 @@ public class Maingun : MonoBehaviour
     public AudioSource stopAudioSource;
 
     bool isFireing = false;
+
+    float dmg;
+    float velocity;
+    float rpm;
+
+    public void Init(float d, float v, float r)
+    {
+        dmg = d;
+        velocity = v;
+        rpm = r;
+    }
+
     public void SetisFireing(bool inputdata)
     {
         isFireing = inputdata;
@@ -44,20 +56,19 @@ public class Maingun : MonoBehaviour
 
 
     float fireDelay = 0;
-    float fireRPM = 1200;
     void Fireing()
     {
         fireDelay += Time.deltaTime;
-        if (fireDelay >= (60/fireRPM))
+        if (fireDelay >= (60/rpm))
         {
             var newBullet = BulletManager.GetBullet();
             Transform FirePosition = transform;
-            newBullet.transform.position = FirePosition.position;
+            newBullet.transform.position = FirePosition.position;//탄 위치, 회전 조정
             newBullet.transform.rotation = FirePosition.rotation;
 
-            newBullet.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.up * 300 + parentObject.GetComponent<Rigidbody>().velocity, ForceMode.Impulse);
-            newBullet.Shoot();
+            newBullet.GetComponent<Rigidbody>().velocity = Vector3.zero;//탄 속도 0으로 조정
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.up * velocity * 0.2f + parentObject.GetComponent<Rigidbody>().velocity, ForceMode.Impulse);//탄 발사
+            newBullet.Init(dmg);
             
             fireDelay = 0;
         }
