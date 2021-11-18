@@ -64,7 +64,7 @@ public class Maingun : MonoBehaviour
             var newBullet = BulletManager.GetBullet();
             Transform FirePosition = transform;
             newBullet.transform.position = FirePosition.position;//탄 위치, 회전 조정
-            newBullet.transform.rotation = FirePosition.rotation;
+            newBullet.transform.rotation = FirePosition.rotation * Quaternion.AngleAxis(Random.Range(-2, 2), new Vector3(0, 0, 1));
 
             newBullet.GetComponent<Rigidbody>().velocity = Vector3.zero;//탄 속도 0으로 조정
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.up * velocity * 0.2f + parentObject.GetComponent<Rigidbody>().velocity, ForceMode.Impulse);//탄 발사

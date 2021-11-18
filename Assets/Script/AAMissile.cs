@@ -29,7 +29,7 @@ public class AAMissile : MonoBehaviour
         velocity = v;
         mobility = m;
     }
-
+    
     void Fire()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -55,12 +55,12 @@ public class AAMissile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddForce(transform.up * velocity * Time.deltaTime, ForceMode.Acceleration);
+        rb.AddForce(transform.up * velocity * 100 * Time.deltaTime, ForceMode.Acceleration);
 
         if (target != null)
         {
             Vector3 dir = target.transform.position - transform.position;
-            dir = target.transform.position + target.transform.up * Mathf.Clamp(dir.magnitude * 0.4f, 0, 100) - transform.position;
+            dir = target.transform.position + target.transform.up * Mathf.Clamp(dir.magnitude * 0.4f, 0, 50) - transform.position;
 
             float toTargetAngle = Mathf.Clamp(CaleAngle(transform.up) - CaleAngle(dir), -1, 1);//시커 추적률
 

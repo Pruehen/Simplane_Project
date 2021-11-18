@@ -9,8 +9,8 @@ public class WeaponStatus : MonoBehaviour
     float gun_Rpm = 1200;
 
     float mis_Dmg = 100;
-    float mis_Velocity = 12000;
-    float mis_Mobility = 25;
+    float mis_Velocity = 100;
+    float mis_Mobility = 40;
     public float Mis_Dmg { get { return mis_Dmg; } }
     public float Mis_Velocity { get { return mis_Velocity; } }
     public float Mis_Mobility { get { return mis_Mobility; } }
