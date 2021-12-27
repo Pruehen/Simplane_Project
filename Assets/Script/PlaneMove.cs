@@ -12,8 +12,8 @@ public class PlaneMove : MonoBehaviour
     float enginePower;
     float mobility;
 
-    float PowerConstant = 1;
-    float mobilityConstant = 2;
+    float PowerConstant = 1f;
+    float mobilityConstant = 4;
 
     void Awake()
     {
@@ -26,7 +26,7 @@ public class PlaneMove : MonoBehaviour
 
     void Start()
     {
-        Init();
+        Invoke("Init", Time.deltaTime);
     }
 
     void Init()
@@ -56,17 +56,17 @@ public class PlaneMove : MonoBehaviour
             Vector3 rightMovement = -Vector3.forward * Time.deltaTime * joystick.Horizontal;
 
 
-            rb.AddForce((transform.up * 15 * Time.deltaTime + upMovement * 10) * enginePower * PowerConstant);
-            rb.AddForce(transform.right * 1f * Time.deltaTime * joystick.Horizontal * mobility * mobilityConstant);
+            rb.AddForce((transform.up * 30 * Time.deltaTime + upMovement * 10) * enginePower * PowerConstant);
+            rb.AddForce(transform.right * 2 * Time.deltaTime * joystick.Horizontal * mobility * mobilityConstant);
             rb.AddTorque(rightMovement * mobility * mobilityConstant);
         }
-        else if (gameObject.tag == "Enemy")
+        else if (gameObject.tag == "Enemy" && virtualjoystick != null)
         {
             Vector3 upMovement = transform.up * Time.deltaTime * virtualjoystick.Vertical;
             Vector3 rightMovement = -Vector3.forward * Time.deltaTime * virtualjoystick.Horizontal;
 
 
-            rb.AddForce((transform.up * 15 * Time.deltaTime + upMovement * 10) * enginePower * PowerConstant);
+            rb.AddForce((transform.up * 30 * Time.deltaTime + upMovement * 10) * enginePower * PowerConstant);
             rb.AddForce(transform.right * 1f * Time.deltaTime * virtualjoystick.Horizontal * mobility * mobilityConstant);
             rb.AddTorque(rightMovement * mobility * mobilityConstant);
         }

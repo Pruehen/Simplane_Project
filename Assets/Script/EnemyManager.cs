@@ -6,28 +6,41 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField]
     GameObject enemyPrefab;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 30; i++)
-        {
-            GameObject createdEnemy = GameObject.Instantiate(enemyPrefab);
-            createdEnemy.transform.position = new Vector3(Random.Range(-200, 200), Random.Range(-200, 200));
-        }
+        player = GameObject.Find("Player");
 
-        InvokeRepeating("CreateEnemy", 5, 5);
+        for (int i = 0; i < 5; i++)
+        {
+            CreateEnemy();
+        }
     }
+
+    float level = 1;
+    float levelcount;
 
     // Update is called once per frame
     void Update()
     {
-        
+        levelcount += Time.deltaTime;
+
+        if (levelcount > (100/(10+level)))
+        {
+            CreateEnemy();
+            level++;
+            levelcount = 0;
+
+            Debug.Log(level);
+        }
     }
 
     void CreateEnemy()
     {
-        GameObject createdEnemy = GameObject.Instantiate(enemyPrefab);
-        createdEnemy.transform.position = new Vector3(Random.Range(-200, 200), Random.Range(-200, 200));
+        GameObject createdEnemy = Instantiate(enemyPrefab);
+        createdEnemy.name = "Enemy";
+        createdEnemy.transform.position = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100)).normalized * Random.Range(200, 400) + player.transform.position;
     }
 }

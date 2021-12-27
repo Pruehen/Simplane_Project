@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponButton : MonoBehaviour
 {
     Maingun maingun;
     WeaponSystem weaponSystem;
+
 
     bool isFireing = false;
 
@@ -20,6 +22,7 @@ public class WeaponButton : MonoBehaviour
         {
             weaponSystem = GameObject.Find("WeaponSystem").GetComponent<WeaponSystem>();
         }
+
     }
 
     // Update is called once per frame
@@ -29,20 +32,16 @@ public class WeaponButton : MonoBehaviour
     }
 
 
-    public void OnClick() 
-    {
-        if (gameObject.name == "MaingunButton")
-        {
-            isFireing = !isFireing;
-            maingun.SetisFireing(isFireing);
-        }
-    }
-
     public void OnPointDown()
     {
         if (gameObject.name == "MissileButton")
         {
             weaponSystem.IsFireReady = true;
+        }
+
+        else if(this.name == "MaingunButton")
+        {
+            maingun.SetisFireing(true);
         }
     }
 
@@ -51,6 +50,11 @@ public class WeaponButton : MonoBehaviour
         if (gameObject.name == "MissileButton")
         {
             weaponSystem.IsFire = true;
+        }
+
+        else if (this.name == "MaingunButton")
+        {
+            maingun.SetisFireing(false);
         }
     }
 }

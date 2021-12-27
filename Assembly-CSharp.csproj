@@ -77,11 +77,15 @@
     <Compile Include="Assets\Script\Bullet.cs" />
     <Compile Include="Assets\Script\BulletManager.cs" />
     <Compile Include="Assets\Script\CameraMove.cs" />
+    <Compile Include="Assets\Script\EnemyAI.cs" />
     <Compile Include="Assets\Script\EnemyManager.cs" />
     <Compile Include="Assets\Script\Explosion.cs" />
+    <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Joystick.cs" />
     <Compile Include="Assets\Script\Maingun.cs" />
+    <Compile Include="Assets\Script\Mwr.cs" />
     <Compile Include="Assets\Script\PlaneMove.cs" />
+    <Compile Include="Assets\Script\PlaneStatus.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\PlayerWeaponSystem.cs" />
     <Compile Include="Assets\Script\RocketTail.cs" />

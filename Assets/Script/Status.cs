@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    float hp;
+    float hp = 1;
     float enginePower;
     float mobility;
-    public float Hp { get { return hp; } set { hp = value; } }
-    public float EnginePower { get { return enginePower; } set { enginePower = value; } }
-    public float Mobility { get { return mobility; } set { mobility = value; } }
+    int score;
+    public float Hp { get { return hp; } }
+    public float EnginePower { get { return enginePower; } }
+    public float Mobility { get { return mobility; } }
+    public int Score { get { return score; } }
 
-    private void Awake()
-    {
-        hp = 100;
-        enginePower = 100;
-        mobility = 100;
-    }
+
+
     // Start is called before the first frame update
     void Start()
     {
+        if (this.gameObject.name == PlaneStatus.instance.enemyStatus.PlaneName)
+        {
+            hp = (PlaneStatus.instance.enemyStatus.Hp);
+            enginePower = (PlaneStatus.instance.enemyStatus.EnginePower);
+            mobility = (PlaneStatus.instance.enemyStatus.Mobility);
+            score = (PlaneStatus.instance.enemyStatus.Score);
+        }
+    }
 
+    private void Awake()
+    {
+        if (this.gameObject.tag == "Player")
+        {
+            hp = (PlaneStatus.instance.playerStatus.Hp);
+            enginePower = (PlaneStatus.instance.playerStatus.EnginePower);
+            mobility = (PlaneStatus.instance.playerStatus.Mobility);
+            score = (PlaneStatus.instance.enemyStatus.Score);
+        }
     }
 
     // Update is called once per frame
@@ -28,12 +43,18 @@ public class Status : MonoBehaviour
     {
         if (hp <= 0)
         {
-            GameObject.Destroy(gameObject);
+            PlaneDown();
         }
+    }
+
+    void PlaneDown()
+    {
+        UIManager.instance.UpScore(score);
+        GameObject.Destroy(gameObject);
     }
 
     public void Damage(float dmg)
     {
-        Hp -= dmg;
+        hp -= dmg;
     }
 }

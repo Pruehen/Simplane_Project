@@ -26,7 +26,7 @@ public class BackgroundMove : MonoBehaviour
         transform.position = player.transform.position;
 
         Vector3 deltaOffset = material.mainTextureOffset;
-        playerSpeed = player.Getspeed * Time.deltaTime * 0.01f;
+        playerSpeed = player.Getspeed * Time.deltaTime * 0.003f;
         deltaOffset.Set(deltaOffset.x + playerSpeed.x, deltaOffset.y + playerSpeed.y, 0);
 
 
